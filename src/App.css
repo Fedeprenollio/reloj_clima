@@ -1,0 +1,142 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* .logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+body {
+  background-color: #74ebd5;
+  background-image: linear-gradient(98deg, #74ebd5 0%, #9face6 100%);
+}
+
+.container {
+  width: 600px;
+  height: 600px;
+  background: rgb(34, 193, 195);
+  background: radial-gradient(
+    circle,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(149, 230, 199, 1) 100%
+  );
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  /* margin: 0 2rem; */
+  margin-top: 1rem;
+}
+.city {
+  font-size: 4rem;
+}
+
+.temperature {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: start;
+  align-items: center;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  text-align: start;
+}
+
+.date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  /* margin: 0 2rem; */
+  margin-top: 1rem;
+}
+
+.date-border {
+  /* border: solid 0.5px black; */
+  width: 100%;
+  height: 100%;
+  padding: 0.2rem;
+  /* word-break:normal */
+}
+
+.time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 150px;
+  height: 150px; */
+  font-size: 6rem;
+  /* margin: 0 2rem; */
+  margin-top: 2rem;
+}
+
+.time-border {
+  /* border: solid 1px rgb(244, 239, 239); */
+  width: 100%;
+  height: 100%;
+  padding: 1rem 1rem;
+}
+
+p {
+  display: inline-block;
+  line-height: 1em;
+  margin: 0;
+}
+
+.time p {
+  color: white;
+}
+.hour {
+  background-color: black;
+  margin-left: 0.5rem;
+}
+.minute {
+  background-color: black;
+}
+.second {
+  background-color: black;
+  margin-right: 0.5rem;
+}
