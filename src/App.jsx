@@ -111,7 +111,7 @@ function App() {
       <GeoCity />
       <form onSubmit={handleSubmit}>
         <input ref={input} type="text" placeholder="Ingresa una ciudad" />
-        <button>Buscar</button>
+        <button>Buscar ciudad</button>
       </form>
 
       {data.status === 200 && <OtherCity data={data}  />}
