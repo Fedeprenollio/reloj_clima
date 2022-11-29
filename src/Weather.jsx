@@ -19,7 +19,7 @@ export const Weather = ({data, country}) => {
               )}
             </div>
             <img
-              src={`http://openweathermap.org/img/wn/${data?.data?.weather[0]?.icon}@2x.png`}
+              src={`https://openweathermap.org/img/wn/${data?.data?.weather[0]?.icon}@2x.png`}
               alt=""
             />
           </div>

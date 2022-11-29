@@ -26,7 +26,7 @@ function App() {
     //BUSCAMOS EL NOMBRE DE LA CIUDAD:
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${
+        `https://api.openweathermap.org/geo/1.0/direct?q=${
           input.current.value
         }&limit=5&appid=${import.meta.env.VITE_API_KEY}&lang=sp`
       )
@@ -63,7 +63,7 @@ function App() {
     if (latitude !== 0 && longitude !== 0) {
       const a = axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${
             import.meta.env.VITE_API_KEY
           }&lang=sp`
         )
