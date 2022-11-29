@@ -1,9 +1,10 @@
 import React from 'react'
 
-export const Weather = ({data}) => {
+export const Weather = ({data, country}) => {
+  console.log("country",country)
   return (
     <div className="weather">
-          <p className="city">{data?.data?.name}</p>
+          <p className="city">{data?.data?.name}  {country &&  `- ${country}`}  </p>
 
           <div className="temperature">
             <div className="description">

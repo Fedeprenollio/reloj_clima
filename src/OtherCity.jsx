@@ -4,31 +4,9 @@ import { Weather } from "./Weather";
 import { Fecha } from "./Fecha";
 import { Time } from "./Time";
 
-const OtherCity = ({ data }) => {
+const OtherCity = ({ data ,country}) => {
+  console.log("data del tiempo", data)
   const [city, setCity] = useState(null);
-  const timezone  = data?.data?.timezone
-  // let city
-  useEffect(() => {
-    let d = new Date();
-    let localTime = d.getTime();
-    let localOffset = d.getTimezoneOffset() * 60000;
-    let utc = localTime + localOffset;
-    setInterval(() => {
-      setCity(utc + 1000 *timezone );
-     const nd = new Date(city)
-    
-    }, 1000);
-    setDay(new Date(city).getDay());
-    setNumber(new Date(city).getDate());
-    setMonth(new Date(city).getMonth());
-    setYear(new Date(city).getFullYear());
-    setHour(new Date(city).getHours());
-    setMinutes(new Date(city).getMinutes());
-    setSeconds(new Date(city).getSeconds());
-  }, [ city]);
-
-  // let localHour = new Date(city);
-
   const [day, setDay] = useState(new Date(city).getDay());
   const [month, setMonth] = useState(new Date(city).getMonth());
   const [number, setNumber] = useState(new Date(city).getDate());
@@ -36,16 +14,40 @@ const OtherCity = ({ data }) => {
   const [hour, setHour] = useState(new Date(city).getHours());
   const [minutes, setMinutes] = useState(new Date(city).getMinutes());
   const [seconds, setSeconds] = useState(new Date(city).getSeconds());
+  const timezone = data?.data?.timezone;
+  // let city
+  useEffect(() => {
+    setInterval(() => {
+      let d = new Date();
+      let localTime = d.getTime();
+      let localOffset = d.getTimezoneOffset() * 60000;
+      let utc = localTime + localOffset;
+      setCity(utc + 1000 * timezone);
+    }, 1000);
+  }, [city]);
 
-  // useEffect(() => {
-  //   setDay(new Date(city).getDay());
-  //   setNumber(new Date(city).getDate());
-  //   setMonth(new Date(city).getMonth());
-  //   setYear(new Date(city).getFullYear());
-  //   setHour(new Date(city).getHours());
-  //   setMinutes(new Date(city).getMinutes());
-  //   setSeconds(new Date(city).getSeconds());
-  // }, [city, data]);
+
+  useEffect(() => {
+    setDay(new Date(city).getDay());
+    setNumber(new Date(city).getDate());
+    setMonth(new Date(city).getMonth());
+    setYear(new Date(city).getFullYear());
+    setHour(new Date(city).getHours());
+    if (new Date(city).getHours() < 10) {
+      setHour("0" + new Date(city).getHours());
+    }
+    setMinutes(new Date(city).getMinutes());
+    if (new Date(city).getMinutes() < 10) {
+      setMinutes("0" + new Date(city).getMinutes());
+    }
+
+    setSeconds(new Date(city).getSeconds());
+    if (new Date(city).getSeconds() < 10) {
+      setSeconds("0" + new Date(city).getSeconds());
+    }
+  }, [city]);
+
+
   return (
     <div>
       {data.data && (
@@ -53,7 +55,7 @@ const OtherCity = ({ data }) => {
           {/* FECHA */}
           <Fecha day={day} number={number} month={month} year={year} />
           {/* CONDICIONES METEOROLOGICAS */}
-          {data?.data?.name ? <Weather data={data} /> : <p>cargando...</p>}
+          {data ? <Weather data={data} country={country} /> : <p>cargando...</p>}
           {/* TIEMPO */}
           <Time hour={hour} minutes={minutes} seconds={seconds} />
         </div>

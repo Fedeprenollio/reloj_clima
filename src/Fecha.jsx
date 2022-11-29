@@ -28,7 +28,7 @@ export const Fecha = ({day, number, month, year}) => {
   return (
     <div className="date">
     <p>
-      {days[day]} de {number} de {months[month]} {year} 
+      {days[day]}  {number} de {months[month]} de {year} 
     </p>
   </div>
   )

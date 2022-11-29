@@ -9,112 +9,97 @@ import { GeoCity } from "./GeoCity";
 
 function App() {
   const input = useRef();
+  const [dataArray, setDataArray] = useState([]);
+  const selectCity = useRef();
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [country, setCountry] = useState("")
+
+  // const [selectCity, setSelectCity] = useState(null)
+  console.log(dataArray);
   const [data, setData] = useState({});
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setData({})
+    setData({});
+
+    //BUSCAMOS EL NOMBRE DE LA CIUDAD:
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${
+        `http://api.openweathermap.org/geo/1.0/direct?q=${
           input.current.value
-        }&limit=5&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=sp`
+        }&limit=5&appid=${import.meta.env.VITE_API_KEY}&lang=sp`
       )
-      .then((res) => setData(res));
+      .then((res) => setDataArray(res.data));
 
-
-
-
+    // axios
+    //   .get(
+    //     `https://api.openweathermap.org/data/2.5/weather?q=${
+    //       input.current.value
+    //     }&limit=5&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=sp`
+    //   )
+    //   .then((res) => setData(res));
   };
 
+  const handleSelectCity = (e) => {
+    e.preventDefault();
+    setData({});
+    console.log("HOLITA");
+    // setSelectCity(e.target)
+    const [latitudes, longitudes, countryy] = selectCity.current.value.split(",");
+    console.log(countryy)
+    setLatitude(latitudes);
+    setLongitude(longitudes);
+    setCountry(countryy)
+   
+  };
+ 
 
-  // const [minutes, setMinutes] = useState(
-  //   new Date().getMinutes() < 10
-  //     ? "0" + new Date().getMinutes()
-  //     : new Date().getMinutes()
-  // );
-  // const [seconds, setSeconds] = useState(
-  //   new Date().getSeconds() < 10
-  //     ? "0" + new Date().getSeconds()
-  //     : new Date().getSeconds()
-  // );
-  // const [day, setDay] = useState(new Date().getDay());
-  // const [month, setMonth] = useState(new Date().getMonth());
-  // const [number, setNumber] = useState(new Date().getDate());
-  // const [year, setYear] = useState(new Date().getFullYear());
+  const handleSearchCity = (e) => {
+    e.preventDefault();
+    console.log(latitude);
+    console.log(longitude);
 
-  // // function actualizar() {
-  // //   setInterval(() => {
-  // //     setHour(date.getHours());
-  // //     setMinutes(date.getMinutes());
-  // //     setSeconds(date.getSeconds());
-  // //     setDay(date.getDay());
-  // //     setMonth(date.getMonth());
-  // //     setNumber(date.getDate())
-  // //     setYear(date.getFullYear())
-  // //   }, 1000);
-  // // }
-
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setHour(new Date().getHours());
-  //     if (new Date().getHours() < 10) {
-  //       setHour("0" + new Date().getHours());
-  //     }
-  //     setMinutes(new Date().getMinutes());
-  //     if (new Date().getMinutes() < 10) {
-  //       setMinutes("0" + new Date().getMinutes());
-  //     }
-
-  //     setSeconds(new Date().getSeconds());
-  //     if (new Date().getSeconds() < 10) {
-  //       setSeconds("0" + new Date().getSeconds());
-  //     }
-  //     setDay(new Date().getDay());
-  //     setMonth(new Date().getMonth());
-  //     setNumber(new Date().getDate());
-  //     setYear(new Date().getFullYear());
-  //    
-  //   }, 1000);
-  // }, []);
-
-  // const [latitude, setLatitude] = useState(0);
-  // const [longitude, setLongitude] = useState(0);
-  // const [data, setData] = useState({});
-
-  // useEffect(() => {
-  //   if (navigator.geolocation) {
-  //     let success = function (position) {
-  //       setLatitude(position.coords.latitude);
-  //       setLongitude(position.coords.longitude);
-  //     };
-  //     navigator.geolocation.getCurrentPosition(success, function (msg) {
-  //       console.error(msg);
-  //     });
-  //   }
-  //   // const a = axios.get( "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=ce92cb297e528077564dacc3bc683cce").then(res=> console.log(res))
-  //   if (latitude !== 0 && longitude !== 0) {
-  //     const a = axios
-  //       .get(
-  //         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${
-  //           import.meta.env.VITE_API_KEY
-  //         }&lang=sp`
-  //       )
-  //       .then((res) => setData(res));
-  //   }
-
-  //  
-  // }, [latitude, longitude]);
+    if (latitude !== 0 && longitude !== 0) {
+      const a = axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${
+            import.meta.env.VITE_API_KEY
+          }&lang=sp`
+        )
+        .then((res) => {setData(res); });
+    }
+      console.log("selectCity22", data);
+  };
 
   return (
     <div className="container">
       <GeoCity />
+
+
+
+      {dataArray.length > 0 && (
+        <div >
+          <select ref={selectCity} onChange={handleSelectCity}>
+           
+            {dataArray?.map((el, index) => {
+              return (
+                <option key={index}  value={[el.lat, el.lon, el.country]}>
+                  {el.name} - {el.country} {el.lat} -- {el.lon}
+                </option>
+              );
+            })}
+          </select>
+          <button onClick={handleSearchCity}>Seleccionar</button>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit}>
         <input ref={input} type="text" placeholder="Ingresa una ciudad" />
         <button>Buscar ciudad</button>
       </form>
 
-      {data.status === 200 && <OtherCity data={data}  />}
+      {data.status === 200 && <OtherCity data={data} country={country} />}
     </div>
   );
 }
