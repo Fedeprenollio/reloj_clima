@@ -63,7 +63,7 @@ function App() {
     if (latitude !== 0 && longitude !== 0) {
       const a = axios
         .get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${
+          `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${
             import.meta.env.VITE_API_KEY
           }&lang=sp`
         )

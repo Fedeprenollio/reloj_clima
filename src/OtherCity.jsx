@@ -5,7 +5,6 @@ import { Fecha } from "./Fecha";
 import { Time } from "./Time";
 
 const OtherCity = ({ data ,country}) => {
-  console.log("data del tiempo", data)
   const [city, setCity] = useState(null);
   const [day, setDay] = useState(new Date(city).getDay());
   const [month, setMonth] = useState(new Date(city).getMonth());
