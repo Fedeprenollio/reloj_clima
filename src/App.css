@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
 }
 
 /* .logo {
@@ -41,17 +42,14 @@
 } */
 
 body {
-  
   background-color: #74ebd5;
   background-image: linear-gradient(98deg, #74ebd5 0%, #9face6 100%);
 }
-
 
 .container {
   display: flex;
   flex-direction: column;
   width: 600px;
-  height: 600px;
   background: rgb(34, 193, 195);
   background: radial-gradient(
     circle,
@@ -59,6 +57,21 @@ body {
     rgba(149, 230, 199, 1) 100%
   );
   border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+.container-geo {
+  background: #06beb6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #48b1bf,
+    #06beb6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #48b1bf,
+    #06beb6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .weather {
@@ -118,7 +131,6 @@ body {
   margin-top: 2rem;
   background-color: rgba(0, 0, 0, 0.55);
   border-radius: 1rem;
-
 }
 
 .time-border {
@@ -136,7 +148,6 @@ p {
 
 .time p {
   color: white;
- 
 }
 .hour {
   /* background-color: black; */
@@ -148,4 +159,55 @@ p {
 .second {
   /* background-color: black; */
   margin-right: 0.5rem;
+}
+
+.selectCity {
+  width: 200px;
+  padding: 0.3em;
+  margin: 1rem;
+}
+
+.searchCity {
+  width: 200px;
+  padding: 0.3em;
+  margin: 1rem;
+}
+
+.container-search {
+  display: flex;
+  text-align: start;
+  margin: 0 0;
+  background: none;
+}
+
+
+.container-select {
+  display: flex;
+  /* text-align: start; */
+  align-items: center;
+  
+
+}
+
+/* .container-select button{
+ height: 1rem;
+} */
+
+.title {
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: azure;
+  border-radius: 1rem;
+  margin-top: 1rem;
 }

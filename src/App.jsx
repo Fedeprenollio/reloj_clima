@@ -10,36 +10,44 @@ import { SelectCities } from "./SelectCities";
 import { InputSearchCity } from "./InputSearchCity";
 
 function App() {
+ 
   const input = useRef();
   const [dataArray, setDataArray] = useState([]);
   const selectCity = useRef();
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
   const [data, setData] = useState({});
-console.log(data)
+ 
   return (
     <div className="container">
-      <GeoCity />
-
-      <SelectCities
-        dataArray={dataArray}
-        selectCity={selectCity}
-        setLatitude={setLatitude}
-        setLongitude={setLongitude}
-        setCountry={setCountry}
-        setData={setData}
-        longitude={longitude}
-        latitude={latitude}
-      />
+      <h1 className="title">Reloj con estado del tiempo</h1>
+      <p></p>
+      <GeoCity  />
 
       <InputSearchCity
         setDataArray={setDataArray}
         setData={setData}
         input={input}
+        dataArray={dataArray}
       />
 
-      {data.status === 200 && <OtherCity data={data} country={country} />}
+      <SelectCities
+        dataArray={dataArray.data}
+        selectCity={selectCity}
+        setLatitude={setLatitude}
+        setLongitude={setLongitude}
+        setCountry={setCountry}
+        setState={setState}
+        setData={setData}
+        longitude={longitude}
+        latitude={latitude}
+      />
+
+      {data.status === 200 && (
+        <OtherCity data={data} country={country} state={state} />
+      )}
     </div>
   );
 }

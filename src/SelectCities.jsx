@@ -7,6 +7,7 @@ export const SelectCities = ({
   setLatitude,
   setLongitude,
   setCountry,
+  setState,
   setData,
   latitude,
   longitude
@@ -15,15 +16,15 @@ export const SelectCities = ({
 }) => {
   const handleSelectCity = (e) => {
     console.log("tengo q setear la latitud");
-    e.preventDefault();
-    // setData({});
+    e.preventDefault();   
 
-    const [latitudes, longitudes, countryy] =
+    const [latitudes, longitudes, country, state] =
       selectCity.current.value.split(",");
 
     setLatitude(latitudes);
     setLongitude(longitudes);
-    setCountry(countryy);
+    setCountry(country);
+    setState(state)
   };
 
   const handleSearchCity = (e) => {
@@ -46,21 +47,22 @@ export const SelectCities = ({
   };
 
   return (
-    <>
-      {dataArray.length > 0 && (
-        <div>
-          <select ref={selectCity} onChange={handleSelectCity}>
+   
+      dataArray?.length > 0 && (
+        <div className=" container-select">
+          <select className="selectCity" ref={selectCity} onChange={handleSelectCity}>
+            <option selected disabled>Selecciona una ciudad</option>
             {dataArray?.map((el, index) => {
               return (
-                <option key={index} value={[el.lat, el.lon, el.country]}>
-                  {el.name} - {el.country} {el.lat} -- {el.lon}
+                <option key={index} value={[el.lat, el.lon, el.country, el.state]}>
+                  {el.name} - {el.country} 
                 </option>
               );
             })}
           </select>
           <button onClick={handleSearchCity}>Seleccionar</button>
         </div>
-      )}
-    </>
+      )
+  
   );
 };

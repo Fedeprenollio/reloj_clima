@@ -4,7 +4,7 @@ import { Weather } from "./Weather";
 import { Fecha } from "./Fecha";
 import { Time } from "./Time";
 
-const OtherCity = ({ data ,country}) => {
+const OtherCity = ({ data ,country, state}) => {
   const [city, setCity] = useState(null);
   const [day, setDay] = useState(new Date(city).getDay());
   const [month, setMonth] = useState(new Date(city).getMonth());
@@ -48,13 +48,13 @@ const OtherCity = ({ data ,country}) => {
 
 
   return (
-    <div>
+    <div className="container">
       {data.data && (
         <div>
           {/* FECHA */}
           <Fecha day={day} number={number} month={month} year={year} />
           {/* CONDICIONES METEOROLOGICAS */}
-          {data ? <Weather data={data} country={country} /> : <p>cargando...</p>}
+          {data ? <Weather data={data} country={country} state={state} /> : <p>cargando...</p>}
           {/* TIEMPO */}
           <Time hour={hour} minutes={minutes} seconds={seconds} />
         </div>

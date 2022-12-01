@@ -6,6 +6,8 @@ import { Weather } from "./Weather";
 import { Time } from "./Time";
 
 export const GeoCity = () => {
+  const [permissions, setPermissions] = useState(true);
+  const [errorPermission, setErrorPermission] = useState(0);
   const [hour, setHour] = useState(new Date().getHours());
   const [minutes, setMinutes] = useState(
     new Date().getMinutes() < 10
@@ -21,7 +23,6 @@ export const GeoCity = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [number, setNumber] = useState(new Date().getDate());
   const [year, setYear] = useState(new Date().getFullYear());
-
 
   useEffect(() => {
     setInterval(() => {
@@ -42,7 +43,6 @@ export const GeoCity = () => {
       setMonth(new Date().getMonth());
       setNumber(new Date().getDate());
       setYear(new Date().getFullYear());
-      
     }, 1000);
   }, []);
 
@@ -57,7 +57,25 @@ export const GeoCity = () => {
         setLongitude(position.coords.longitude);
       };
       navigator.geolocation.getCurrentPosition(success, function (msg) {
-        console.error(msg);
+        console.error("No has dado los permisos?", msg);
+        switch (msg.code) {
+          case 1:
+            setErrorPermission("Permiso denegado");
+
+            break;
+          case 2:
+            setErrorPermission("Error al obtener la ubicación");
+            break;
+          case 3:
+            setErrorPermission(
+              "Se ha tardado mucho tiempo en obtener la ubicación"
+            );
+            break;
+          default:
+            setErrorPermission("Error desconocido")
+            break;
+        }
+        setPermissions(false);
       });
     }
     if (latitude !== 0 && longitude !== 0) {
@@ -69,19 +87,30 @@ export const GeoCity = () => {
         )
         .then((res) => setData(res));
     }
-
-  
   }, [latitude, longitude]);
 
   return (
-    <div className="container">
+    <div className="container container-geo">
       {/* FECHA */}
       <Fecha day={day} number={number} month={month} year={year} />
       {/* CONDICIONES METEOROLOGICAS */}
-      {data?.data?.name ? <Weather data={data} /> : <p>cargando...</p>}
+      {!permissions ? (
+        <div>
+          <p>
+            No es posible establecer las condiciones meteorologicas al no darle
+            permiso de tu ubicación a la app. Prueba buscar una ciudad
+            manualmente o concede el permiso manualmente.
+          </p>
+          <p style={{ color: "red" }}>{errorPermission}.</p>
+        </div>
+      ) : data?.data?.name ? (
+        <Weather data={data} />
+      ) : (
+        <p>cargando...</p>
+      )}
+
       {/* TIEMPO */}
       <Time hour={hour} minutes={minutes} seconds={seconds} />
-     
     </div>
   );
 };
