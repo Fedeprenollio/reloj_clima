@@ -136,22 +136,55 @@ p {
 .searchCity {
   width: 200px;
   padding: 0.3em;
-  margin: 1rem;
+  margin: 0 1rem ;
 }
 
-.container-search {
+.container-search { 
   display: flex;
   text-align: start;
   margin: 0 0;
   background: none;
+}
+.container-search input{
+  height: 2.5rem;
+  font-size: 1rem;
+  border: none;
+  background: none;
+  color:0f2027 ;
+  border-bottom: 2px solid #0f2027;
+  padding-bottom: 0;
+  
+  
+
+}
+.container-search input:focus {
+ border: none;
+ outline: none;
+ 
+}
+
+.container-search button{
+  height: 2rem;
+  background-color: rgba(0, 0, 0, .1);
+
 }
 
 
 .container-select {
   display: flex;
   /* text-align: start; */
-  align-items: center;
-  
+  align-items: center; 
+
+}
+.container-select button {
+  height: 2rem;
+  background-color: rgba(0, 0, 0, .1);
+
+}
+.container-select select {
+  border-radius: 5px;
+  height: 2rem;
+  background-color: rgba(0, 0, 0, .1);
 
 }
 
