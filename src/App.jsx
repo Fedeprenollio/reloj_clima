@@ -31,10 +31,13 @@ function App() {
         setData={setData}
         input={input}
         dataArray={dataArray}
+        setLatitude={setLatitude}
+        setLongitude={setLongitude}
       />
 
       <SelectCities
         dataArray={dataArray.data}
+        setDataArray={setDataArray}
         selectCity={selectCity}
         setLatitude={setLatitude}
         setLongitude={setLongitude}

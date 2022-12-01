@@ -23,6 +23,7 @@ export const GeoCity = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [number, setNumber] = useState(new Date().getDate());
   const [year, setYear] = useState(new Date().getFullYear());
+  const [isGeo, setIsGeo] = useState(false)
 
   useEffect(() => {
     setInterval(() => {
@@ -55,6 +56,7 @@ export const GeoCity = () => {
       let success = function (position) {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
+        setIsGeo(true)
       };
       navigator.geolocation.getCurrentPosition(success, function (msg) {
         console.error("No has dado los permisos?", msg);
@@ -104,7 +106,7 @@ export const GeoCity = () => {
           <p style={{ color: "red" }}>{errorPermission}.</p>
         </div>
       ) : data?.data?.name ? (
-        <Weather data={data} />
+        <Weather data={data} isGeo={isGeo} />
       ) : (
         <p>cargando...</p>
       )}

@@ -6,11 +6,15 @@ export const InputSearchCity = ({
   setDataArray,
   setData,
   dataArray,
+  setLatitude,
+  setLongitude
 }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
     setData({});
-
+    setDataArray([])
+    setLatitude(undefined)
+  setLongitude(undefined)
     //BUSCAMOS EL NOMBRE DE LA CIUDAD:
     axios
       .get(
@@ -20,18 +24,24 @@ export const InputSearchCity = ({
       )
       .then((res) => {
         if (res.data.length === 0) {
-          alert("Ciudad no econtrada");
+        return   alert("Ciudad no econtrada");
         }
+        setData({});
+      
         setDataArray(res);
+        input.current.value=""
+    
+
       })
       .catch((err) => console.error(err));
   };
 
+ 
   return (
     <div className="container container-search">
       <form onSubmit={handleSubmit}>
         <input className="searchCity" type="search" ref={input} placeholder="Ingresa una ciudad" />
-        <button>Buscar ciudad</button>
+        <button >Buscar ciudad</button>
       </form>
     </div>
   );
