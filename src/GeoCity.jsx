@@ -4,6 +4,8 @@ import "./App.css";
 import { Fecha } from "./Fecha";
 import { Weather } from "./Weather";
 import { Time } from "./Time";
+import { Maps } from "./maps/Maps";
+import { ButtonShowMap } from "./ButtonShowMap";
 
 export const GeoCity = () => {
   const [permissions, setPermissions] = useState(true);
@@ -83,13 +85,18 @@ export const GeoCity = () => {
     if (latitude !== 0 && longitude !== 0) {
       const a = axios
         .get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${
-            import.meta.env.VITE_API_KEY
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${import.meta.env.VITE_API_KEY
           }&lang=sp`
         )
         .then((res) => setData(res));
     }
   }, [latitude, longitude]);
+  
+
+  const [showMap, setShowMap] = useState(false)
+  const handleShowMap = () => {
+      setShowMap(!showMap)
+  }
 
   return (
     <div className="container container-geo">
@@ -113,6 +120,9 @@ export const GeoCity = () => {
 
       {/* TIEMPO */}
       <Time hour={hour} minutes={minutes} seconds={seconds} />
+      <ButtonShowMap handleShowMap={handleShowMap} setShowMap={setShowMap} showMap={showMap}>{showMap ? "Ocultar" : "Mostrar"} mapa de la ubicación</ButtonShowMap>
+      {showMap &&   <Maps latitude={latitude} longitude={longitude} />}
+     
     </div>
   );
 };

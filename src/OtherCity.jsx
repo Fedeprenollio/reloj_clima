@@ -3,8 +3,10 @@ import axios from "axios";
 import { Weather } from "./Weather";
 import { Fecha } from "./Fecha";
 import { Time } from "./Time";
+import { Maps } from "./maps/Maps";
+import { ButtonShowMap } from "./ButtonShowMap";
 
-const OtherCity = ({ data ,country, state}) => {
+const OtherCity = ({ data, country, state, latitude, longitude }) => {
   const [city, setCity] = useState(null);
   const [day, setDay] = useState(new Date(city).getDay());
   const [month, setMonth] = useState(new Date(city).getMonth());
@@ -46,6 +48,11 @@ const OtherCity = ({ data ,country, state}) => {
     }
   }, [city]);
 
+  const [showMap, setShowMap] = useState(false)
+  const handleShowMap = () => {
+    setShowMap(!showMap)
+  }
+
 
   return (
     <div className="container">
@@ -57,6 +64,9 @@ const OtherCity = ({ data ,country, state}) => {
           {data ? <Weather data={data} country={country} state={state} /> : <p>cargando...</p>}
           {/* TIEMPO */}
           <Time hour={hour} minutes={minutes} seconds={seconds} />
+          <ButtonShowMap handleShowMap={handleShowMap} setShowMap={setShowMap} showMap={showMap}>{showMap ? "Ocultar" : "Mostrar"} mapa de la ubicación</ButtonShowMap>
+
+          {showMap && <Maps latitude={latitude} longitude={longitude} />}
         </div>
       )}
     </div>
