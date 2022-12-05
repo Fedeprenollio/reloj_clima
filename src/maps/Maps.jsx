@@ -2,7 +2,9 @@
 
 import React from 'react'
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import {GoLocation} from "react-icons/go"
 import 'leaflet/dist/leaflet.css'
+
 
 export const Maps = ({latitude, longitude}) => {
     return (
@@ -11,9 +13,9 @@ export const Maps = ({latitude, longitude}) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[latitude, longitude]}>
+        <Marker   position={[latitude, longitude]}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+           Tu ubicación es ésta.
           </Popup>
         </Marker>
       </MapContainer>

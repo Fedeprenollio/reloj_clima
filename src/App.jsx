@@ -23,8 +23,8 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="title">Reloj con estado del tiempo</h1>
-      <p></p>
+      <h1 className="title">Reloj con estado del clima</h1>
+     
       <GeoCity />
 
 
